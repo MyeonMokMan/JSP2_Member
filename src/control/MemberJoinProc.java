@@ -56,7 +56,8 @@ public class MemberJoinProc extends HttpServlet {
 			MemberDAO mdao = new MemberDAO();
 			mdao.insertMember(bean);
 			
-			RequestDispatcher dis = request.getRequestDispatcher("MemberList.jsp");
+			//컨트롤러에서 또 다른 컨트롤러를 호출해주어야 한다.
+			RequestDispatcher dis = request.getRequestDispatcher("MemberListCon.do");
 			dis.forward(request, response);
 			
 		} else {
