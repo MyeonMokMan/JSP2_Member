@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 
 public class MemberDAO {
 	
@@ -55,4 +56,57 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public Vector<MemberBean> getAllMember() {
+		
+			Vector<MemberBean> vec = new Vector<MemberBean>();
+			
+			try {
+				
+				getCon();
+				
+				String sql = "select * from member";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					MemberBean mbean = new MemberBean();
+					
+					mbean.setId(rs.getString(1));
+					mbean.setPass1(rs.getString(2));
+					mbean.setEmail(rs.getString(3));
+					mbean.setTel(rs.getString(4));
+					mbean.setHobby(rs.getString(5));
+					mbean.setJob(rs.getString(6));
+					mbean.setAge(rs.getString(7));
+					mbean.setInfo(rs.getString(8));
+					
+					vec.add(mbean);
+				}
+				
+				con.close();
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				
+			}
+			
+			return vec;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
